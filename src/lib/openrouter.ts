@@ -231,7 +231,7 @@ ${data.keywords_links.map(item => `• "${item.keyword}" = ${item.frequency} ค
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
-          'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || process.env.SITE_URL || 'http://localhost:3000',
+          'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
           'X-Title': 'SEO Onpage Generator'
         },
         timeout: 180000, // 3 minutes for longer content
@@ -337,15 +337,7 @@ ${data.keywords_links.map(item => `• "${item.keyword}" = ${item.frequency} ค
       if (error.response?.status === 401) {
         return {
           success: false,
-          message: `❌ OpenRouter API authentication failed!
-
-API Key ไม่ถูกต้องหรือหมดอายุ:
-• ตรวจสอบว่าได้กรอก API Key ของคุณเองใน Settings
-• API Key ต้องขึ้นต้นด้วย "sk-or-v1-"
-• ห้ามใช้ API Key ตัวอย่าง
-• ตรวจสอบ credits ใน OpenRouter dashboard
-
-กรุณาไปที่หน้า Settings และตั้งค่า API Key ใหม่`
+          message: 'OpenRouter API authentication failed. กรุณาตรวจสอบ API Key ในหน้า Settings'
         };
       }
       

@@ -4,80 +4,123 @@ export async function POST(request: NextRequest) {
   try {
     const { api_key, model } = await request.json();
 
-    console.log('🧪 Testing OpenRouter API');
-    console.log('- API Key received:', api_key ? `${api_key.substring(0, 10)}...` : 'NONE');
-    console.log('- API Key length:', api_key ? api_key.length : 0);
-    console.log('- API Key format:', api_key ? api_key.startsWith('sk-or-v1-') : 'N/A');
-    console.log('- Model:', model);
+    console.log('🔧 Testing OpenRouter API...');
+    console.log('- API Key length:', api_key?.length || 0);
+    console.log('- API Key format check:', api_key?.startsWith('sk-or-v1-') || false);
+    console.log('- Model:', model || 'deepseek/deepseek-r1-0528-qwen3-8b');
 
     if (!api_key) {
+      console.log('❌ No API key provided');
       return NextResponse.json(
         { success: false, message: 'API Key ไม่ได้ระบุ' },
         { status: 400 }
       );
     }
 
+    // Validate API key format
     if (!api_key.startsWith('sk-or-v1-')) {
+      console.log('❌ Invalid API key format');
       return NextResponse.json(
         { 
           success: false, 
-          message: `❌ API Key รูปแบบไม่ถูกต้อง (ต้องขึ้นต้นด้วย sk-or-v1-)
-          
-ได้รับ API Key: ${api_key.substring(0, 20)}...
-รูปแบบที่ถูกต้อง: sk-or-v1-xxxxxxxxx
-
-กรุณาตรวจสอบ API Key ใน OpenRouter dashboard` 
+          message: 'API Key รูปแบบไม่ถูกต้อง ต้องขึ้นต้นด้วย "sk-or-v1-"' 
         },
         { status: 400 }
       );
     }
+
+    // Check for demo/invalid keys
+    const demoKeys = [
+      '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',
+      'sk-or-v1-test',
+      'sk-or-v1-demo',
+      'sk-or-v1-example'
+    ];
+
+    if (demoKeys.includes(api_key)) {
+      console.log('❌ Demo API key detected');
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: '❌ นี่เป็น Demo API Key ที่ไม่สามารถใช้งานได้\n\nกรุณาไปที่ OpenRouter.ai สมัครบัญชีและสร้าง API Key ของคุณเอง' 
+        },
+        { status: 400 }
+      );
+    }
+
+    const requestBody = {
+      model: model || 'deepseek/deepseek-r1-0528-qwen3-8b',
+      messages: [
+        {
+          role: 'user',
+          content: 'ทดสอบการเชื่อมต่อ กรุณาตอบกลับว่า "การเชื่อมต่อสำเร็จ"'
+        }
+      ],
+      max_tokens: 50,
+      temperature: 0.1
+    };
+
+    console.log('📤 Sending request to OpenRouter...');
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${api_key}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || process.env.SITE_URL || 'http://localhost:3000',
+        'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
         'X-Title': 'SEO Content Generator'
       },
-      body: JSON.stringify({
-        model: model || 'deepseek/deepseek-r1-0528-qwen3-8b',
-        messages: [
-          {
-            role: 'user',
-            content: 'ทดสอบการเชื่อมต่อ กรุณาตอบกลับว่า "การเชื่อมต่อสำเร็จ"'
-          }
-        ],
-        max_tokens: 50,
-        temperature: 0.1
-      })
+      body: JSON.stringify(requestBody)
     });
+
+    console.log('📊 Response status:', response.status);
 
     if (!response.ok) {
       const errorData = await response.text();
+      console.log('❌ API Error:', errorData);
+      
+      let errorMessage = `OpenRouter API Error: ${response.status}`;
+      
+      try {
+        const errorJson = JSON.parse(errorData);
+        if (response.status === 401) {
+          errorMessage = `❌ API Key ไม่ถูกต้องหรือหมดอายุ
+          
+กรุณาตรวจสอบ:
+1. API Key ถูกต้องหรือไม่
+2. API Key ยังใช้งานได้หรือไม่  
+3. บัญชี OpenRouter มี credits เหลืออยู่หรือไม่
+
+Error: ${errorJson.error?.message || errorData}`;
+        } else {
+          errorMessage = `${errorMessage} - ${errorJson.error?.message || errorData}`;
+        }
+      } catch (parseError) {
+        errorMessage = `${errorMessage} - ${errorData}`;
+      }
+      
       return NextResponse.json(
-        { 
-          success: false, 
-          message: `OpenRouter API Error: ${response.status} - ${errorData}` 
-        },
+        { success: false, message: errorMessage },
         { status: 400 }
       );
     }
 
     const data = await response.json();
+    console.log('✅ OpenRouter API test successful');
     
     return NextResponse.json({
       success: true,
-      message: 'OpenRouter API ทำงานปกติ',
-      response: data.choices?.[0]?.message?.content || 'ได้รับการตอบกลับจาก AI'
+      message: '✅ OpenRouter API ทำงานปกติ!',
+      response: data.choices?.[0]?.message?.content || 'ได้รับการตอบกลับจาก AI',
+      usage: data.usage
     });
 
   } catch (error) {
-    console.error('Test OpenRouter error:', error);
+    console.error('💥 Test OpenRouter error:', error);
     return NextResponse.json(
       { 
         success: false, 
-        message: `เกิดข้อผิดพลาด: ${error instanceof Error ? error.message : 'Unknown error'}` 
+        message: `เกิดข้อผิดพลาดในการทดสอบ: ${error instanceof Error ? error.message : 'Unknown error'}` 
       },
       { status: 500 }
     );
