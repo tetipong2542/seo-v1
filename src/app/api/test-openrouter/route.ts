@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     // Check for demo/invalid keys
     const demoKeys = [
-      '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',
+      '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',
       'sk-or-v1-test',
       'sk-or-v1-demo',
       'sk-or-v1-example'
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           success: false, 
-          message: '❌ นี่เป็น Demo API Key ที่ไม่สามารถใช้งานได้\n\nกรุณาไปที่ OpenRouter.ai สมัครบัญชีและสร้าง API Key ของคุณเอง' 
+          message: '❌ นี่เป็น Demo API Key ที่ใช้ร่วมกัน\n\nสำหรับการใช้งานส่วนตัว กรุณาไปที่ OpenRouter.ai สมัครบัญชีและสร้าง API Key ของคุณเอง\n\nDemo Key นี้อาจมีข้อจำกัดหรือหมดอายุได้' 
         },
         { status: 400 }
       );

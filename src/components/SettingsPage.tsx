@@ -312,7 +312,7 @@ export function SettingsPage() {
 
   const fillDefaultSettings = () => {
     setSettings({
-      openrouter_api_key: '',
+      openrouter_api_key: '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',
       openrouter_model: 'deepseek/deepseek-r1-0528-qwen3-8b',
       smtp_host: 'smtp.gmail.com',
       smtp_port: 587,
@@ -327,7 +327,7 @@ export function SettingsPage() {
     
     setMessage({
       type: 'info',
-      text: '✅ เติมค่าเริ่มต้นเรียบร้อยแล้ว! กรุณากรอก OpenRouter API Key และข้อมูลอีเมลของคุณเอง แล้วบันทึกการตั้งค่า'
+      text: '✅ เติมค่าเริ่มต้นเรียบร้อยแล้ว! OpenRouter API Key พร้อมใช้งาน กรุณากรอกข้อมูลอีเมลของคุณเอง แล้วบันทึกการตั้งค่า'
     });
   };
 
