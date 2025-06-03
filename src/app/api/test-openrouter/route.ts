@@ -4,9 +4,30 @@ export async function POST(request: NextRequest) {
   try {
     const { api_key, model } = await request.json();
 
+    console.log('🧪 Testing OpenRouter API');
+    console.log('- API Key received:', api_key ? `${api_key.substring(0, 10)}...` : 'NONE');
+    console.log('- API Key length:', api_key ? api_key.length : 0);
+    console.log('- API Key format:', api_key ? api_key.startsWith('sk-or-v1-') : 'N/A');
+    console.log('- Model:', model);
+
     if (!api_key) {
       return NextResponse.json(
         { success: false, message: 'API Key ไม่ได้ระบุ' },
+        { status: 400 }
+      );
+    }
+
+    if (!api_key.startsWith('sk-or-v1-')) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: `❌ API Key รูปแบบไม่ถูกต้อง (ต้องขึ้นต้นด้วย sk-or-v1-)
+          
+ได้รับ API Key: ${api_key.substring(0, 20)}...
+รูปแบบที่ถูกต้อง: sk-or-v1-xxxxxxxxx
+
+กรุณาตรวจสอบ API Key ใน OpenRouter dashboard` 
+        },
         { status: 400 }
       );
     }

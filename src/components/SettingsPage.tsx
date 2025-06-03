@@ -172,8 +172,27 @@ export function SettingsPage() {
       return;
     }
 
+    // Validate API key format before sending
+    if (!settings.openrouter_api_key.startsWith('sk-or-v1-')) {
+      setMessage({
+        type: 'error',
+        text: `❌ API Key รูปแบบไม่ถูกต้อง!
+        
+รูปแบบที่ถูกต้อง: sk-or-v1-xxxxxxxxx
+API Key ของคุณ: ${settings.openrouter_api_key.substring(0, 20)}...
+
+กรุณาตรวจสอบ API Key ใน OpenRouter.ai`
+      });
+      return;
+    }
+
     setTestingStates(prev => ({ ...prev, openrouter: true }));
     setMessage(null);
+
+    console.log('🔧 Testing OpenRouter API with:');
+    console.log('- API Key format:', settings.openrouter_api_key.startsWith('sk-or-v1-') ? '✅' : '❌');
+    console.log('- API Key length:', settings.openrouter_api_key.length);
+    console.log('- Model:', settings.openrouter_model);
 
     try {
       const response = await fetch('/api/test-openrouter', {
@@ -192,7 +211,7 @@ export function SettingsPage() {
       if (result.success) {
         setMessage({
           type: 'success',
-          text: '✅ OpenRouter API ทำงานปกติ!'
+          text: '✅ OpenRouter API ทำงานปกติ! 🎉'
         });
       } else {
         setMessage({
@@ -311,23 +330,25 @@ export function SettingsPage() {
   };
 
   const fillDefaultSettings = () => {
-    setSettings({
-      openrouter_api_key: '',
+    const defaultSettings = {
+      openrouter_api_key: '', // ผู้ใช้ต้องใส่ API key ของตัวเอง
       openrouter_model: 'deepseek/deepseek-r1-0528-qwen3-8b',
       smtp_host: 'smtp.gmail.com',
       smtp_port: 587,
-      smtp_user: '',
-      smtp_password: '',
-      from_email: '',
+      smtp_user: '', // ผู้ใช้ต้องใส่ Gmail ของตัวเอง
+      smtp_password: '', // ผู้ใช้ต้องใส่ App Password ของตัวเอง
+      from_email: '', // ผู้ใช้ต้องใส่อีเมลของตัวเอง
       from_name: 'SEO Content Generator',
       google_client_email: '',
       google_private_key: '',
       google_project_id: '',
-    });
+    };
+    
+    setSettings(defaultSettings);
     
     setMessage({
       type: 'info',
-      text: '✅ เติมค่าเริ่มต้นเรียบร้อยแล้ว! กรุณากรอก OpenRouter API Key และ Gmail Configuration ของคุณเอง'
+      text: '✅ เติมค่าเริ่มต้นเรียบร้อยแล้ว! ✨ Model: deepseek, SMTP: smtp.gmail.com:587, From Name: SEO Content Generator - กรุณากรอก API Key และ Email ของคุณเอง'
     });
   };
 
@@ -423,14 +444,18 @@ export function SettingsPage() {
             
             <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
               <p className="text-sm text-yellow-800">
-                <strong>🔑 วิธีรับ OpenRouter API Key:</strong><br />
-                1. ไปที่ <a href="https://openrouter.ai" target="_blank" className="text-blue-600 hover:underline">OpenRouter.ai</a><br />
-                2. สมัครสมาชิกหรือเข้าสู่ระบบ<br />
-                3. ไปที่ หน้า API Keys<br />
-                4. สร้าง API Key ใหม่<br />
-                5. คัดลอกมาใส่ในช่องด้านล่าง<br /><br />
-                <strong>⚠️ สำคัญ:</strong> API Key ต้องเป็นของคุณเอง ห้ามใช้ API Key ตัวอย่าง!<br />
-                <strong>✅ ตัวอย่าง API Key ที่ถูกต้อง:</strong> sk-or-v1-xxx...
+                <strong>🔑 วิธีรับ OpenRouter API Key ที่ถูกต้อง:</strong><br />
+                1. ไปที่ <a href="https://openrouter.ai/keys" target="_blank" className="text-blue-600 hover:underline font-semibold">OpenRouter.ai/keys</a> 🔗<br />
+                2. สร้างบัญชีใหม่ (หรือเข้าสู่ระบบ)<br />
+                3. คลิก "Create Key" สร้าง API Key ใหม่<br />
+                4. กำหนดชื่อ API Key (เช่น "SEO Generator")<br />
+                5. คัดลอก API Key ที่ขึ้นต้นด้วย <code className="bg-yellow-100 px-1 rounded">sk-or-v1-</code><br />
+                6. วาง API Key ลงในช่องด้านล่าง<br /><br />
+                <strong>⚠️ สำคัญมาก:</strong><br />
+                • API Key ต้องเป็นของคุณเอง (ไม่ใช่ตัวอย่าง)<br />
+                • ต้องขึ้นต้นด้วย <code className="bg-yellow-100 px-1 rounded">sk-or-v1-</code><br />
+                • ต้องมี credits เพียงพอใน account<br />
+                • <strong>ตัวอย่าง:</strong> <code className="bg-green-100 px-1 rounded">sk-or-v1-abc123def456...</code>
               </p>
             </div>
             
