@@ -36,10 +36,10 @@ export async function POST(request: NextRequest) {
     // Get OpenRouter settings from client request or fallback to environment variables
     console.log('🔧 Getting OpenRouter settings...');
     
-    let openrouterApiKey: string;
-    let openrouterModel: string;
+    let openrouterApiKey: string = '';
+    let openrouterModel: string = '';
     
-    // Check if client sent settings
+    // Check if client sent settings (prioritize client settings)
     const clientSettings = (body as any)._openrouter_settings;
     
     if (clientSettings && clientSettings.api_key) {
@@ -47,21 +47,53 @@ export async function POST(request: NextRequest) {
       openrouterApiKey = clientSettings.api_key;
       openrouterModel = clientSettings.model || 'deepseek/deepseek-r1-0528-qwen3-8b';
       console.log('✅ Client settings found');
-      console.log('- Model from Settings:', openrouterModel);
+      console.log('- API Key found:', openrouterApiKey.startsWith('sk-or-v1-'));
+      console.log('- Model from Client:', openrouterModel);
     } else {
-      console.log('🔧 Fallback to environment variables...');
+      console.log('📱 No client settings found, checking environment variables...');
       openrouterApiKey = process.env.OPENROUTER_API_KEY || '';
       openrouterModel = process.env.OPENROUTER_MODEL || 'deepseek/deepseek-r1-0528-qwen3-8b';
       console.log('- Using Environment Variables');
+      console.log('- ENV API Key found:', !!openrouterApiKey);
       console.log('- Model from ENV:', openrouterModel);
     }
     
     if (!openrouterApiKey) {
-      console.error('❌ OpenRouter API key not found');
+      console.error('❌ OpenRouter API key not found in both client settings and environment variables');
       return NextResponse.json(
         { 
           success: false, 
-          message: 'กรุณาตั้งค่า OpenRouter API Key ในหน้า Settings หรือใน environment variables',
+          message: `❌ ไม่พบ OpenRouter API Key
+          
+กรุณาตั้งค่า OpenRouter API Key ในหน้า Settings:
+1. คลิกปุ่ม "Settings" ด้านบนขวา
+2. กรอก OpenRouter API Key 
+3. กดปุ่ม "บันทึกการตั้งค่า"
+4. ทดสอบด้วยปุ่ม "ทดสอบ"
+
+หรือตั้งค่าใน Environment Variables (สำหรับ admin):
+OPENROUTER_API_KEY=your-api-key`,
+          formData: body,
+          debug_info: {
+            client_settings_found: !!clientSettings,
+            env_key_found: !!process.env.OPENROUTER_API_KEY,
+            client_api_key_exists: !!(clientSettings && clientSettings.api_key)
+          }
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate API key format
+    if (!openrouterApiKey.startsWith('sk-or-v1-')) {
+      console.error('❌ Invalid OpenRouter API key format');
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: `❌ OpenRouter API Key รูปแบบไม่ถูกต้อง
+          
+API Key ต้องขึ้นต้นด้วย "sk-or-v1-"
+กรุณาตรวจสอบ API Key ในหน้า Settings`,
           formData: body
         },
         { status: 400 }
@@ -69,7 +101,6 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('✅ OpenRouter settings ready');
-    console.log('- API Key found:', openrouterApiKey.startsWith('sk-or-v1-'));
     console.log('- Final Model:', openrouterModel);
     
     let finalSuccess = false;

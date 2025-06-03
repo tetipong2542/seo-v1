@@ -8,7 +8,7 @@ import { KeywordsLinksInput } from '@/components/ui/KeywordsLinksInput';
 import { SEOFormData, KeywordLink } from '@/types';
 import { validateSEOForm } from '@/lib/validation';
 import { indexedDBService } from '@/lib/indexeddb';
-import { Loader2, Send, CheckCircle, XCircle } from 'lucide-react';
+import { Loader2, Send, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 
 interface FormState {
   isSubmitting: boolean;
@@ -198,6 +198,29 @@ export function SEOForm() {
         <p className="text-gray-600">
           สร้างเนื้อหา SEO คุณภาพสูงด้วย AI และส่งไปยังอีเมลของคุณ
         </p>
+      </div>
+
+      {/* Settings Notice */}
+      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="text-sm">
+            <p className="text-blue-800 font-medium mb-1">
+              🚀 ก่อนเริ่มใช้งาน: กรุณาตั้งค่าระบบ
+            </p>
+            <p className="text-blue-700 mb-2">
+              หากยังไม่ได้ตั้งค่า จะไม่สามารถสร้างเนื้อหา SEO ได้ กรุณาไปที่หน้า Settings ก่อน
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                ✅ OpenRouter API Key
+              </span>
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                ✅ Email Configuration
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">

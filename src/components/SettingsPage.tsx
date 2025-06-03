@@ -378,12 +378,32 @@ export function SettingsPage() {
         </div>
       ) : (
         <div className="space-y-6 sm:space-y-8">
+          {/* Important Notice */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div className="text-sm text-blue-700">
+                <p className="font-medium mb-1">📝 สำคัญ: การตั้งค่าสำหรับ Production</p>
+                <p>ระบบจะใช้การตั้งค่าจากหน้านี้เป็นหลัก หากไม่มีการตั้งค่าจะไม่สามารถสร้างเนื้อหา SEO ได้</p>
+                <p className="mt-2">✅ <strong>ขั้นตอนการใช้งาน:</strong></p>
+                <ol className="list-decimal list-inside mt-1 space-y-1">
+                  <li>กรอก OpenRouter API Key (จำเป็น)</li>
+                  <li>กรอกข้อมูล Email Configuration (จำเป็น)</li>
+                  <li>กดปุ่ม "บันทึกการตั้งค่า"</li>
+                  <li>ทดสอบแต่ละส่วนด้วยปุ่ม "ทดสอบ"</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
           {/* OpenRouter API Section */}
           <div className="bg-white rounded-lg border p-4 sm:p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Key className="h-6 w-6 text-blue-600" />
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">OpenRouter API</h2>
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                  OpenRouter API <span className="text-red-500">*จำเป็น</span>
+                </h2>
               </div>
               <Button
                 variant="outline"
@@ -401,6 +421,17 @@ export function SettingsPage() {
               </Button>
             </div>
             
+            <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                <strong>🔑 วิธีรับ OpenRouter API Key:</strong><br />
+                1. ไปที่ <a href="https://openrouter.ai" target="_blank" className="text-blue-600 hover:underline">OpenRouter.ai</a><br />
+                2. สมัครสมาชิกหรือเข้าสู่ระบบ<br />
+                3. ไปที่ หน้า API Keys<br />
+                4. สร้าง API Key ใหม่<br />
+                5. คัดลอกมาใส่ในช่องด้านล่าง
+              </p>
+            </div>
+            
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -413,7 +444,7 @@ export function SettingsPage() {
                   onChange={(e) => updateSettings('openrouter_api_key', e.target.value)}
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  รับ API Key ได้ที่ <a href="https://openrouter.ai" target="_blank" className="text-blue-600 hover:underline">OpenRouter.ai</a>
+                  API Key ต้องขึ้นต้นด้วย "sk-or-v1-"
                 </p>
               </div>
 
@@ -433,7 +464,7 @@ export function SettingsPage() {
                   ))}
                 </select>
                 <p className="mt-1 text-xs text-gray-500">
-                  เลือก AI Model ที่ต้องการใช้สำหรับสร้างเนื้อหา
+                  แนะนำ: deepseek/deepseek-r1-0528-qwen3-8b (ราคาถูก, คุณภาพดี)
                 </p>
               </div>
             </div>
@@ -444,7 +475,9 @@ export function SettingsPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <Mail className="h-6 w-6 text-green-600" />
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Email Configuration</h2>
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                  Email Configuration <span className="text-red-500">*จำเป็น</span>
+                </h2>
               </div>
               <Button
                 variant="outline"
@@ -460,6 +493,16 @@ export function SettingsPage() {
                 )}
                 ทดสอบ
               </Button>
+            </div>
+
+            <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-sm text-green-800">
+                <strong>📧 วิธีตั้งค่า Gmail App Password:</strong><br />
+                1. เปิด 2-Factor Authentication ใน Google Account<br />
+                2. ไปที่ <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-blue-600 hover:underline">Google App Passwords</a><br />
+                3. สร้าง App Password สำหรับ "Mail"<br />
+                4. คัดลอก 16-character password มาใส่ในช่อง App Password
+              </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -532,15 +575,6 @@ export function SettingsPage() {
                   placeholder="SEO Content Generator"
                 />
               </div>
-            </div>
-
-            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
-              <p className="text-sm text-yellow-800">
-                <strong>คำแนะนำ Gmail:</strong> ต้องเปิด 2-Factor Authentication และสร้าง App Password ที่ 
-                <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-blue-600 hover:underline ml-1">
-                  Google App Passwords
-                </a>
-              </p>
             </div>
           </div>
 
