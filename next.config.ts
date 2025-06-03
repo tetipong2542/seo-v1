@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
-  outputFileTracingRoot: process.cwd(),
   // Disable source maps in production to reduce bundle size
   productionBrowserSourceMaps: false,
   // Optimize images
