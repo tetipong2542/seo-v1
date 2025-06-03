@@ -312,22 +312,22 @@ export function SettingsPage() {
 
   const fillDefaultSettings = () => {
     setSettings({
-      openrouter_api_key: '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',
-      openrouter_model: 'openai/gpt-4o-mini',
+      openrouter_api_key: '',
+      openrouter_model: 'deepseek/deepseek-r1-0528-qwen3-8b',
       smtp_host: 'smtp.gmail.com',
       smtp_port: 587,
-      smtp_user: 'tetipong2@gmail.com',
-      smtp_password: 'ydpc xxmj ptlv pdok',
-      from_email: 'tetipong2@gmail.com',
+      smtp_user: '',
+      smtp_password: '',
+      from_email: '',
       from_name: 'SEO Content Generator',
-      google_client_email: 'n8n-868@lofty-door-460604-b9.iam.gserviceaccount.com',
-      google_private_key: '-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDLXmzIrbU3+awU\nG/JRsbcCeSgZ3TKXa3As9DfRCA3WOGaWcSAMicpgvhnQ1CzUhjyUTu9Qpwxl613Y\ngzYyyc61BJZQIfxkNiRQiR4kGSez188zm65rg9CoQRskQpGLi0Crw9hCtBiFR2vR\nqG99bWFdoMLy+Vol0xBBpCX4i3VlinYlXRkYh+ij7LAXWWtBy8RybKbJCedXzCNF\n4L9Z41XmZPdmqmGZav2LUEMPCZfjQ2Ao0r7yb1b8U+i7FFSK/EtIo2oH/3sHbumI\nHCbIU4FuVZQ6r0MLk7cK7uX5byNuboZoy5HhPG62ggDh6Jyuod492tEjgf9jkN3c\n2NQ2ui8rAgMBAAECggEAN04l+ksXGbJZxBw3gVT5hoApUiNP81LB7k+58CwnCydK\nasY354D/WuDHx30z9dXNmq1+smnDWuIvosZIEnbEMoEdWYxshVod9RLc8gcvP17E\nl+3R+KYfs+oEtg8uYosLmsqHQNiWRISAQ0NxkmQREvO5oHcEN34XESrRMq7GTcbl\n1yk5JYIXwpLzCT1NhbKL37LT7PHoBRbsbWF67RlfbH6Z/r4syONg87tAb6cCU2xG\nSbA9Ot4He4ftq//ADMLEEv0GeGTBS4GT68x+feTJIA8GpzbJgHlIs64z708WLcy/\n4Wd1zIw6w6K4h95X5YX/xHh1oBVd8ognH0El0n/WGQKBgQD1/oo7uaaFzWXcIXKS\n4fkZft0kU6dM6jGWc3kDt7dH/JHe7y/Gp42Mo5nl8OzlIc3ONU9dsubffrLmDLab\nf+zT5NtSufPMfteCzl9IXnMrCZqNawcgQuMn5YweSeGR86bPSC8N9ZrbofdmIPM3\nC/9VDjfz8BiebiDQYuQdmzPmQwKBgQDTpAouyB0kogQ8v9pSxqchP6olRrZS0wcc\nqENQ7iyXuOL0E/4KmfSvHuGL2hI93udbjkiRdX6Qpe9rfstKKUNZ3HcjCpNH+Mg/\nI/eKgGFpMNpxzAYJWyzrQxPMdFLDRgl8If4bkRwSgQgryM9sHYTvWXmRCwGVwwMM\n3C3ovDxo+QKBgQDpe9vArIl93mKb+bNB7vH8XQmQ/UWCH5dJcfieqrVvwi7CJsx2\nBXq4zl+4fGCdauRooPjfunqgDyXGbLK2DUnAJSx27MCWjJ4JLdAKZHtzkf371GZD\nHLl2mM3RwdY0LctaWu0ulruRU736VbQDv4NuO7yn8G+tkGHc6MATycgM+QKBgQCn\nz/FXCMu66VCMzt8RNXz96xpBdmFJKRUBjxXZTRFEuJAUUunjhBG07bqPhrliH6W5\nPgeidtSFY12FEcOlqTRDQ4Gf4lnH/qbhEebNBmC25MrA4rKCpq3mWYiQXEfnmFga\n+mUffJ8SuQc+mHqH0pw+oOa4sE5wbnGzt74bRW5tGQKBgQCA6O9FkbeVAOLPUt6N\n1YwIsxhS+8Ll8XRipxZxDlA+Uqpwk3id7O6w8ivd4tQQWboOwuU/xDC5MrzIwnU3\n5Ez3TnJHm9ZHeMuMGd7JgpM+6Rsg5SBdc8BC8iYrNsvaQeR2hGVKKhKCGZV67HZx\nfDbVk98tY9a8kbMQ1IlY7wesFg==\n-----END PRIVATE KEY-----',
-      google_project_id: 'lofty-door-460604-b9',
+      google_client_email: '',
+      google_private_key: '',
+      google_project_id: '',
     });
     
     setMessage({
       type: 'info',
-      text: '✅ เติมข้อมูลเริ่มต้นเรียบร้อยแล้ว! อย่าลืมบันทึกการตั้งค่า'
+      text: '✅ เติมค่าเริ่มต้นเรียบร้อยแล้ว! กรุณากรอก OpenRouter API Key และ Gmail Configuration ของคุณเอง'
     });
   };
 
@@ -428,7 +428,9 @@ export function SettingsPage() {
                 2. สมัครสมาชิกหรือเข้าสู่ระบบ<br />
                 3. ไปที่ หน้า API Keys<br />
                 4. สร้าง API Key ใหม่<br />
-                5. คัดลอกมาใส่ในช่องด้านล่าง
+                5. คัดลอกมาใส่ในช่องด้านล่าง<br /><br />
+                <strong>⚠️ สำคัญ:</strong> API Key ต้องเป็นของคุณเอง ห้ามใช้ API Key ตัวอย่าง!<br />
+                <strong>✅ ตัวอย่าง API Key ที่ถูกต้อง:</strong> sk-or-v1-xxx...
               </p>
             </div>
             

@@ -102,6 +102,9 @@ API Key ต้องขึ้นต้นด้วย "sk-or-v1-"
 
     console.log('✅ OpenRouter settings ready');
     console.log('- Final Model:', openrouterModel);
+    console.log('- API Key format check:', openrouterApiKey.startsWith('sk-or-v1-'));
+    console.log('- API Key length:', openrouterApiKey.length);
+    console.log('- First 20 chars:', openrouterApiKey.substring(0, 20) + '...');
     
     let finalSuccess = false;
     let finalMessage = '';

@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Authorization': `Bearer ${api_key}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.SITE_URL || 'http://localhost:3000',
+        'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || process.env.SITE_URL || 'http://localhost:3000',
         'X-Title': 'SEO Content Generator'
       },
       body: JSON.stringify({
