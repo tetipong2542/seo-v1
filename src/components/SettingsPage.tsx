@@ -341,30 +341,40 @@ export function SettingsPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 space-y-6 sm:space-y-8 pb-20 sm:pb-6">
-      <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">ตั้งค่าระบบ</h1>
-        <p className="text-gray-600">จัดการการตั้งค่าสำหรับ SEO Content Generator</p>
+    <div className="max-w-4xl mx-auto p-4 sm:p-8 space-y-6 sm:space-y-8 pb-20 sm:pb-6">
+      <div className="text-center mb-8">
+        <div className="inline-block p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-sm mb-4">
+          <Key className="h-8 w-8 text-white" />
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3">
+          ตั้งค่าระบบ
+        </h1>
+        <p className="text-gray-600 text-lg">จัดการการตั้งค่าสำหรับ SEO Content Generator</p>
       </div>
 
       {message && (
-        <div className={`p-4 rounded-lg flex items-start gap-3 ${
-          message.type === 'success' 
-            ? 'bg-green-50 border border-green-200' 
+        <div className={`p-5 rounded-xl flex items-start gap-3 shadow-sm ${
+          message.type === 'success'
+            ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50'
             : message.type === 'error'
-            ? 'bg-red-50 border border-red-200'
-            : 'bg-blue-50 border border-blue-200'
+            ? 'bg-gradient-to-r from-red-50 to-rose-50 border border-red-200/50'
+            : 'bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200/50'
         }`}>
-          {message.type === 'success' ? (
-            <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-          ) : message.type === 'error' ? (
-            <XCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
-          ) : (
-            <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-          )}
-          <p className={`text-sm ${
-            message.type === 'success' ? 'text-green-700' : 
-            message.type === 'error' ? 'text-red-700' : 'text-blue-700'
+          <div className={`p-2 rounded-lg ${
+            message.type === 'success' ? 'bg-green-100/50' :
+            message.type === 'error' ? 'bg-red-100/50' : 'bg-blue-100/50'
+          }`}>
+            {message.type === 'success' ? (
+              <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+            ) : message.type === 'error' ? (
+              <XCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+            ) : (
+              <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
+            )}
+          </div>
+          <p className={`text-sm leading-relaxed flex-1 ${
+            message.type === 'success' ? 'text-green-800' :
+            message.type === 'error' ? 'text-red-800' : 'text-blue-800'
           }`}>
             {message.text}
           </p>
@@ -372,21 +382,23 @@ export function SettingsPage() {
       )}
 
       {isLoadingSettings ? (
-        <div className="text-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto text-blue-600 mb-4" />
-          <p className="text-gray-600">กำลังโหลดการตั้งค่า...</p>
+        <div className="text-center py-16">
+          <Loader2 className="h-10 w-10 animate-spin mx-auto text-blue-600 mb-4" />
+          <p className="text-gray-600 text-lg">กำลังโหลดการตั้งค่า...</p>
         </div>
       ) : (
         <div className="space-y-6 sm:space-y-8">
           {/* Important Notice */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100/50 rounded-xl p-5 shadow-sm">
             <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-blue-700">
-                <p className="font-medium mb-1">📝 สำคัญ: การตั้งค่าสำหรับ Production</p>
-                <p>ระบบจะใช้การตั้งค่าจากหน้านี้เป็นหลัก หากไม่มีการตั้งค่าจะไม่สามารถสร้างเนื้อหา SEO ได้</p>
-                <p className="mt-2">✅ <strong>ขั้นตอนการใช้งาน:</strong></p>
-                <ol className="list-decimal list-inside mt-1 space-y-1">
+              <div className="p-2 bg-blue-100/50 rounded-lg">
+                <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
+              </div>
+              <div className="text-sm text-blue-800 flex-1">
+                <p className="font-bold mb-2 text-base">สำคัญ: การตั้งค่าสำหรับ Production</p>
+                <p className="leading-relaxed mb-3">ระบบจะใช้การตั้งค่าจากหน้านี้เป็นหลัก หากไม่มีการตั้งค่าจะไม่สามารถสร้างเนื้อหา SEO ได้</p>
+                <p className="font-semibold mb-2">ขั้นตอนการใช้งาน:</p>
+                <ol className="list-decimal list-inside space-y-1.5 ml-1">
                   <li>กรอก OpenRouter API Key (จำเป็น)</li>
                   <li>กรอกข้อมูล Email Configuration (จำเป็น)</li>
                   <li>กดปุ่ม "บันทึกการตั้งค่า"</li>
@@ -397,13 +409,18 @@ export function SettingsPage() {
           </div>
 
           {/* OpenRouter API Section */}
-          <div className="bg-white rounded-lg border p-4 sm:p-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-5 sm:p-7 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <Key className="h-6 w-6 text-blue-600" />
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                  OpenRouter API <span className="text-red-500">*จำเป็น</span>
-                </h2>
+                <div className="p-2 bg-blue-100 rounded-xl">
+                  <Key className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                    OpenRouter API
+                  </h2>
+                  <p className="text-xs text-red-600 font-medium mt-0.5">*จำเป็น</p>
+                </div>
               </div>
               <Button
                 variant="outline"
@@ -421,15 +438,19 @@ export function SettingsPage() {
               </Button>
             </div>
             
-            <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-sm text-yellow-800">
-                <strong>🔑 วิธีรับ OpenRouter API Key:</strong><br />
-                1. ไปที่ <a href="https://openrouter.ai" target="_blank" className="text-blue-600 hover:underline">OpenRouter.ai</a><br />
-                2. สมัครสมาชิกหรือเข้าสู่ระบบ<br />
-                3. ไปที่ หน้า API Keys<br />
-                4. สร้าง API Key ใหม่<br />
-                5. คัดลอกมาใส่ในช่องด้านล่าง<br /><br />
-                <strong className="text-red-700">⚠️ สำคัญ:</strong> ต้องใช้ API Key ของคุณเอง ห้ามใช้ demo key หรือ key ของคนอื่น!
+            <div className="mb-5 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-100/50 rounded-xl shadow-sm">
+              <p className="text-sm text-yellow-900 leading-relaxed">
+                <strong className="font-bold text-base">วิธีรับ OpenRouter API Key:</strong><br />
+                <span className="mt-2 block space-y-1">
+                  1. ไปที่ <a href="https://openrouter.ai" target="_blank" className="text-blue-600 hover:underline font-medium">OpenRouter.ai</a><br />
+                  2. สมัครสมาชิกหรือเข้าสู่ระบบ<br />
+                  3. ไปที่ หน้า API Keys<br />
+                  4. สร้าง API Key ใหม่<br />
+                  5. คัดลอกมาใส่ในช่องด้านล่าง
+                </span>
+                <span className="mt-3 block p-2 bg-red-50 border border-red-100 rounded-lg">
+                  <strong className="text-red-700 font-bold">⚠️ สำคัญ:</strong> ต้องใช้ API Key ของคุณเอง ห้ามใช้ demo key หรือ key ของคนอื่น!
+                </span>
               </p>
             </div>
             
@@ -472,13 +493,18 @@ export function SettingsPage() {
           </div>
 
           {/* Email Configuration Section */}
-          <div className="bg-white rounded-lg border p-4 sm:p-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-5 sm:p-7 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <Mail className="h-6 w-6 text-green-600" />
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                  Email Configuration <span className="text-red-500">*จำเป็น</span>
-                </h2>
+                <div className="p-2 bg-green-100 rounded-xl">
+                  <Mail className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                    Email Configuration
+                  </h2>
+                  <p className="text-xs text-red-600 font-medium mt-0.5">*จำเป็น</p>
+                </div>
               </div>
               <Button
                 variant="outline"
@@ -496,13 +522,15 @@ export function SettingsPage() {
               </Button>
             </div>
 
-            <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-sm text-green-800">
-                <strong>📧 วิธีตั้งค่า Gmail App Password:</strong><br />
-                1. เปิด 2-Factor Authentication ใน Google Account<br />
-                2. ไปที่ <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-blue-600 hover:underline">Google App Passwords</a><br />
-                3. สร้าง App Password สำหรับ "Mail"<br />
-                4. คัดลอก 16-character password มาใส่ในช่อง App Password
+            <div className="mb-5 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100/50 rounded-xl shadow-sm">
+              <p className="text-sm text-green-900 leading-relaxed">
+                <strong className="font-bold text-base">วิธีตั้งค่า Gmail App Password:</strong><br />
+                <span className="mt-2 block space-y-1">
+                  1. เปิด 2-Factor Authentication ใน Google Account<br />
+                  2. ไปที่ <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-blue-600 hover:underline font-medium">Google App Passwords</a><br />
+                  3. สร้าง App Password สำหรับ "Mail"<br />
+                  4. คัดลอก 16-character password มาใส่ในช่อง App Password
+                </span>
               </p>
             </div>
             
@@ -580,11 +608,16 @@ export function SettingsPage() {
           </div>
 
           {/* Google APIs Section */}
-          <div className="bg-white rounded-lg border p-4 sm:p-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-5 sm:p-7 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <Cloud className="h-6 w-6 text-orange-600" />
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Google APIs</h2>
+                <div className="p-2 bg-orange-100 rounded-xl">
+                  <Cloud className="h-6 w-6 text-orange-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Google APIs</h2>
+                  <p className="text-xs text-gray-500 font-medium mt-0.5">ไม่บังคับ</p>
+                </div>
               </div>
               <Button
                 variant="outline"
