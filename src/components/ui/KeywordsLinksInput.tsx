@@ -48,7 +48,7 @@ export function KeywordsLinksInput({ value, onChange, error }: KeywordsLinksInpu
       </div>
 
       {value.length === 0 && (
-        <div className="text-sm text-gray-500 bg-gray-50 p-4 rounded-lg border-2 border-dashed border-gray-300">
+        <div className="text-sm text-gray-500 bg-gray-50 p-4 rounded-2xl border-2 border-dashed border-gray-300">
           <p className="text-center">ยังไม่มี Keywords & Links</p>
           <p className="text-center text-xs mt-1">คลิก "เพิ่ม" เพื่อเริ่มต้น</p>
         </div>
@@ -56,7 +56,7 @@ export function KeywordsLinksInput({ value, onChange, error }: KeywordsLinksInpu
 
       <div className="space-y-3">
         {value.map((item, index) => (
-          <div key={index} className="flex gap-3 items-start p-4 bg-gray-50 rounded-lg border">
+          <div key={index} className="flex gap-3 items-start p-5 bg-gray-50/80 rounded-2xl border border-gray-200 shadow-sm">
             <div className="flex-1 space-y-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
@@ -113,12 +113,12 @@ export function KeywordsLinksInput({ value, onChange, error }: KeywordsLinksInpu
       </div>
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 p-2 rounded border border-red-200">
+        <p className="text-sm text-red-600 bg-red-50 p-3 rounded-xl border border-red-200">
           {error}
         </p>
       )}
 
-      <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded border border-blue-200">
+      <div className="text-xs text-gray-500 bg-blue-50 p-4 rounded-2xl border border-blue-200 shadow-sm">
         <p className="font-medium text-blue-700 mb-1">💡 คำแนะนำ:</p>
         <ul className="space-y-1 text-blue-600">
           <li>• <strong>Keyword:</strong> คำสำคัญที่ต้องการใช้ในเนื้อหา</li>

@@ -190,37 +190,37 @@ export function SEOForm() {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto p-4 sm:p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 mb-4 sm:mb-0">
-      <div className="text-center mb-8 sm:mb-10">
-        <div className="inline-block p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-sm mb-4">
-          <Send className="h-8 w-8 text-white" />
+    <div className="max-w-4xl mx-auto p-6 sm:p-10 bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl border border-gray-100/50 mb-4 sm:mb-0">
+      <div className="text-center mb-10 sm:mb-12">
+        <div className="inline-flex p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 rounded-3xl shadow-lg mb-6 transform hover:scale-105 transition-transform duration-200">
+          <Send className="h-10 w-10 text-white" />
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3">
+        <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent mb-4 tracking-tight">
           SEO Onpage Automate
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
           สร้างเนื้อหา SEO คุณภาพสูงด้วย AI และส่งไปยังอีเมลของคุณ
         </p>
       </div>
 
       {/* Settings Notice */}
-      <div className="mb-8 p-5 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100/50 rounded-xl shadow-sm">
-        <div className="flex items-start gap-3">
-          <div className="p-2 bg-blue-100/50 rounded-lg">
-            <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
+      <div className="mb-10 p-6 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100/50 rounded-2xl shadow-sm">
+        <div className="flex items-start gap-4">
+          <div className="p-2.5 bg-blue-100/60 rounded-xl">
+            <AlertCircle className="h-6 w-6 text-blue-600 flex-shrink-0" />
           </div>
           <div className="text-sm flex-1">
-            <p className="text-blue-900 font-semibold mb-2">
+            <p className="text-blue-900 font-semibold mb-2 text-base">
               ก่อนเริ่มใช้งาน: กรุณาตั้งค่าระบบ
             </p>
             <p className="text-blue-700 mb-3 leading-relaxed">
               หากยังไม่ได้ตั้งค่า จะไม่สามารถสร้างเนื้อหา SEO ได้ กรุณาไปที่หน้า Settings ก่อน
             </p>
             <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50">
+              <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50 shadow-sm">
                 OpenRouter API Key
               </span>
-              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50">
+              <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50 shadow-sm">
                 Email Configuration
               </span>
             </div>
@@ -239,7 +239,7 @@ export function SEOForm() {
             placeholder="ชื่อเว็บไซต์หรือธุรกิจของคุณ"
             value={formData.website_name}
             onChange={(e) => handleInputChange('website_name', e.target.value)}
-            className={`rounded-xl ${errors.website_name ? 'border-red-300 bg-red-50/50' : ''}`}
+            className={`rounded-2xl ${errors.website_name ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_name && (
             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -259,7 +259,7 @@ export function SEOForm() {
             placeholder="https://www.example.com"
             value={formData.website_url}
             onChange={(e) => handleInputChange('website_url', e.target.value)}
-            className={`rounded-xl ${errors.website_url ? 'border-red-300 bg-red-50/50' : ''}`}
+            className={`rounded-2xl ${errors.website_url ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_url && (
             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -279,7 +279,7 @@ export function SEOForm() {
             value={formData.website_description}
             onChange={(e) => handleInputChange('website_description', e.target.value)}
             rows={4}
-            className={`rounded-xl resize-none ${errors.website_description ? 'border-red-300 bg-red-50/50' : ''}`}
+            className={`rounded-2xl resize-none ${errors.website_description ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_description && (
             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -299,7 +299,7 @@ export function SEOForm() {
             placeholder="หัวข้อสำหรับเนื้อหา SEO ที่ต้องการสร้าง"
             value={formData.page_title}
             onChange={(e) => handleInputChange('page_title', e.target.value)}
-            className={`rounded-xl ${errors.page_title ? 'border-red-300 bg-red-50/50' : ''}`}
+            className={`rounded-2xl ${errors.page_title ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.page_title && (
             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -325,7 +325,7 @@ export function SEOForm() {
             value={formData.additional_prompt}
             onChange={(e) => handleInputChange('additional_prompt', e.target.value)}
             rows={3}
-            className="rounded-xl resize-none"
+            className="rounded-2xl resize-none"
           />
         </div>
 
@@ -337,9 +337,9 @@ export function SEOForm() {
             {contentLengthOptions.map((option) => (
               <div
                 key={option.value}
-                className={`flex items-start p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                className={`flex items-start p-4 rounded-2xl border-2 transition-all cursor-pointer ${
                   formData.content_length === option.value
-                    ? 'border-blue-500 bg-blue-50/50 shadow-sm'
+                    ? 'border-blue-500 bg-blue-50/50 shadow-md'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50/50'
                 }`}
                 onClick={() => handleInputChange('content_length', option.value)}
@@ -383,7 +383,7 @@ export function SEOForm() {
             placeholder="อีเมลที่ต้องการให้ส่งเนื้อหา SEO ไป"
             value={formData.recipient_email}
             onChange={(e) => handleInputChange('recipient_email', e.target.value)}
-            className={`rounded-xl ${errors.recipient_email ? 'border-red-300 bg-red-50/50' : ''}`}
+            className={`rounded-2xl ${errors.recipient_email ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.recipient_email && (
             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
@@ -396,7 +396,7 @@ export function SEOForm() {
         <Button
           type="submit"
           disabled={formState.isSubmitting}
-          className="w-full py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
+          className="w-full py-7 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
         >
           {formState.isSubmitting ? (
             <>
@@ -412,12 +412,12 @@ export function SEOForm() {
         </Button>
 
         {formState.message && (
-          <div className={`p-5 rounded-xl flex items-start gap-3 shadow-sm ${
+          <div className={`p-6 rounded-2xl flex items-start gap-3 shadow-md ${
             formState.isSuccess
               ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50'
               : 'bg-gradient-to-r from-red-50 to-rose-50 border border-red-200/50'
           }`}>
-            <div className={`p-2 rounded-lg ${formState.isSuccess ? 'bg-green-100/50' : 'bg-red-100/50'}`}>
+            <div className={`p-2.5 rounded-xl ${formState.isSuccess ? 'bg-green-100/50' : 'bg-red-100/50'}`}>
               {formState.isSuccess ? (
                 <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
               ) : (
