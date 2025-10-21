@@ -38,8 +38,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
     <>
       {/* Desktop Header - Hidden on mobile */}
       <div className="hidden sm:block bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100/50 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between py-5">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex items-center justify-between py-5 bg-white/60 rounded-2xl shadow-sm border border-gray-100/50 px-8 my-3">
             <div className="flex items-center space-x-3 group">
               <div className="p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-sm group-hover:shadow-md transition-all duration-200">
                 <FileText className="h-6 w-6 text-white" />
@@ -81,8 +81,8 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
 
       {/* Mobile Header - Simple brand only */}
       <div className="sm:hidden bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100/50 sticky top-0 z-50">
-        <div className="px-4 py-4">
-          <div className="flex items-center justify-center space-x-2.5">
+        <div className="px-4 py-3">
+          <div className="flex items-center justify-center space-x-2.5 bg-white/60 rounded-2xl shadow-sm border border-gray-100/50 py-3 mx-2">
             <div className="p-1.5 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm">
               <FileText className="h-5 w-5 text-white" />
             </div>
@@ -94,7 +94,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
       </div>
 
       {/* Mobile Bottom Navigation - Sticky */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 shadow-2xl z-50">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 shadow-2xl z-50 rounded-t-3xl">
         <nav className="flex safe-bottom">
           {navItems.map((item) => {
             const Icon = item.icon;
