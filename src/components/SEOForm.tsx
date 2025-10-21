@@ -190,42 +190,47 @@ export function SEOForm() {
   ];
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-lg mb-4 sm:mb-0">
-      <div className="text-center mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+    <div className="max-w-3xl mx-auto p-4 sm:p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100 mb-4 sm:mb-0">
+      <div className="text-center mb-8 sm:mb-10">
+        <div className="inline-block p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-sm mb-4">
+          <Send className="h-8 w-8 text-white" />
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-3">
           SEO Onpage Automate
         </h1>
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-lg">
           สร้างเนื้อหา SEO คุณภาพสูงด้วย AI และส่งไปยังอีเมลของคุณ
         </p>
       </div>
 
       {/* Settings Notice */}
-      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+      <div className="mb-8 p-5 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100/50 rounded-xl shadow-sm">
         <div className="flex items-start gap-3">
-          <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-          <div className="text-sm">
-            <p className="text-blue-800 font-medium mb-1">
-              🚀 ก่อนเริ่มใช้งาน: กรุณาตั้งค่าระบบ
+          <div className="p-2 bg-blue-100/50 rounded-lg">
+            <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0" />
+          </div>
+          <div className="text-sm flex-1">
+            <p className="text-blue-900 font-semibold mb-2">
+              ก่อนเริ่มใช้งาน: กรุณาตั้งค่าระบบ
             </p>
-            <p className="text-blue-700 mb-2">
+            <p className="text-blue-700 mb-3 leading-relaxed">
               หากยังไม่ได้ตั้งค่า จะไม่สามารถสร้างเนื้อหา SEO ได้ กรุณาไปที่หน้า Settings ก่อน
             </p>
             <div className="flex flex-wrap gap-2">
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                ✅ OpenRouter API Key
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50">
+                OpenRouter API Key
               </span>
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                ✅ Email Configuration
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 border border-blue-200/50">
+                Email Configuration
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div>
-          <label htmlFor="website_name" className="block text-sm font-medium text-gray-700 mb-2">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
+        <div className="space-y-2">
+          <label htmlFor="website_name" className="block text-sm font-semibold text-gray-700">
             ชื่อเว็บไซต์
           </label>
           <Input
@@ -234,16 +239,19 @@ export function SEOForm() {
             placeholder="ชื่อเว็บไซต์หรือธุรกิจของคุณ"
             value={formData.website_name}
             onChange={(e) => handleInputChange('website_name', e.target.value)}
-            className={errors.website_name ? 'border-red-500' : ''}
+            className={`rounded-xl ${errors.website_name ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_name && (
-            <p className="mt-1 text-sm text-red-600">{errors.website_name}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.website_name}
+            </p>
           )}
         </div>
 
-        <div>
-          <label htmlFor="website_url" className="block text-sm font-medium text-gray-700 mb-2">
-            URL เว็บไซต์ (ไม่บังคับ)
+        <div className="space-y-2">
+          <label htmlFor="website_url" className="block text-sm font-semibold text-gray-700">
+            URL เว็บไซต์ <span className="text-gray-400 font-normal">(ไม่บังคับ)</span>
           </label>
           <Input
             id="website_url"
@@ -251,15 +259,18 @@ export function SEOForm() {
             placeholder="https://www.example.com"
             value={formData.website_url}
             onChange={(e) => handleInputChange('website_url', e.target.value)}
-            className={errors.website_url ? 'border-red-500' : ''}
+            className={`rounded-xl ${errors.website_url ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_url && (
-            <p className="mt-1 text-sm text-red-600">{errors.website_url}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.website_url}
+            </p>
           )}
         </div>
 
-        <div>
-          <label htmlFor="website_description" className="block text-sm font-medium text-gray-700 mb-2">
+        <div className="space-y-2">
+          <label htmlFor="website_description" className="block text-sm font-semibold text-gray-700">
             รายละเอียดเว็บไซต์
           </label>
           <Textarea
@@ -268,15 +279,18 @@ export function SEOForm() {
             value={formData.website_description}
             onChange={(e) => handleInputChange('website_description', e.target.value)}
             rows={4}
-            className={errors.website_description ? 'border-red-500' : ''}
+            className={`rounded-xl resize-none ${errors.website_description ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.website_description && (
-            <p className="mt-1 text-sm text-red-600">{errors.website_description}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.website_description}
+            </p>
           )}
         </div>
 
-        <div>
-          <label htmlFor="page_title" className="block text-sm font-medium text-gray-700 mb-2">
+        <div className="space-y-2">
+          <label htmlFor="page_title" className="block text-sm font-semibold text-gray-700">
             ชื่อหน้า/ชื่อเรื่อง
           </label>
           <Input
@@ -285,10 +299,13 @@ export function SEOForm() {
             placeholder="หัวข้อสำหรับเนื้อหา SEO ที่ต้องการสร้าง"
             value={formData.page_title}
             onChange={(e) => handleInputChange('page_title', e.target.value)}
-            className={errors.page_title ? 'border-red-500' : ''}
+            className={`rounded-xl ${errors.page_title ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.page_title && (
-            <p className="mt-1 text-sm text-red-600">{errors.page_title}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.page_title}
+            </p>
           )}
         </div>
 
@@ -298,9 +315,9 @@ export function SEOForm() {
           error={errors.keywords_links}
         />
 
-        <div>
-          <label htmlFor="additional_prompt" className="block text-sm font-medium text-gray-700 mb-2">
-            คำแนะนำเพิ่มเติม (ไม่บังคับ)
+        <div className="space-y-2">
+          <label htmlFor="additional_prompt" className="block text-sm font-semibold text-gray-700">
+            คำแนะนำเพิ่มเติม <span className="text-gray-400 font-normal">(ไม่บังคับ)</span>
           </label>
           <Textarea
             id="additional_prompt"
@@ -308,16 +325,25 @@ export function SEOForm() {
             value={formData.additional_prompt}
             onChange={(e) => handleInputChange('additional_prompt', e.target.value)}
             rows={3}
+            className="rounded-xl resize-none"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div className="space-y-3">
+          <label className="block text-sm font-semibold text-gray-700">
             ความยาวของเนื้อหา
           </label>
           <div className="space-y-3">
             {contentLengthOptions.map((option) => (
-              <div key={option.value} className="flex items-start">
+              <div
+                key={option.value}
+                className={`flex items-start p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                  formData.content_length === option.value
+                    ? 'border-blue-500 bg-blue-50/50 shadow-sm'
+                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50/50'
+                }`}
+                onClick={() => handleInputChange('content_length', option.value)}
+              >
                 <input
                   type="radio"
                   id={`content_length_${option.value}`}
@@ -327,25 +353,28 @@ export function SEOForm() {
                   onChange={(e) => handleInputChange('content_length', e.target.value)}
                   className="mt-1 h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
                 />
-                <div className="ml-3">
-                  <label 
+                <div className="ml-3 flex-1">
+                  <label
                     htmlFor={`content_length_${option.value}`}
-                    className="text-sm font-medium text-gray-700 cursor-pointer"
+                    className="text-sm font-semibold text-gray-800 cursor-pointer"
                   >
                     {option.label}
                   </label>
-                  <p className="text-xs text-gray-500 mt-1">{option.description}</p>
+                  <p className="text-xs text-gray-600 mt-1">{option.description}</p>
                 </div>
               </div>
             ))}
           </div>
           {errors.content_length && (
-            <p className="mt-2 text-sm text-red-600">{errors.content_length}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.content_length}
+            </p>
           )}
         </div>
 
-        <div>
-          <label htmlFor="recipient_email" className="block text-sm font-medium text-gray-700 mb-2">
+        <div className="space-y-2">
+          <label htmlFor="recipient_email" className="block text-sm font-semibold text-gray-700">
             อีเมลผู้รับ
           </label>
           <Input
@@ -354,44 +383,49 @@ export function SEOForm() {
             placeholder="อีเมลที่ต้องการให้ส่งเนื้อหา SEO ไป"
             value={formData.recipient_email}
             onChange={(e) => handleInputChange('recipient_email', e.target.value)}
-            className={errors.recipient_email ? 'border-red-500' : ''}
+            className={`rounded-xl ${errors.recipient_email ? 'border-red-300 bg-red-50/50' : ''}`}
           />
           {errors.recipient_email && (
-            <p className="mt-1 text-sm text-red-600">{errors.recipient_email}</p>
+            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+              <XCircle className="h-4 w-4" />
+              {errors.recipient_email}
+            </p>
           )}
         </div>
 
         <Button
           type="submit"
           disabled={formState.isSubmitting}
-          className="w-full py-3 text-lg"
+          className="w-full py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
         >
           {formState.isSubmitting ? (
             <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <Loader2 className="mr-2 h-6 w-6 animate-spin" />
               กำลังสร้างเนื้อหา SEO...
             </>
           ) : (
             <>
-              <Send className="mr-2 h-5 w-5" />
+              <Send className="mr-2 h-6 w-6" />
               สร้างเนื้อหา SEO
             </>
           )}
         </Button>
 
         {formState.message && (
-          <div className={`p-4 rounded-lg flex items-start gap-3 ${
-            formState.isSuccess 
-              ? 'bg-green-50 border border-green-200' 
-              : 'bg-red-50 border border-red-200'
+          <div className={`p-5 rounded-xl flex items-start gap-3 shadow-sm ${
+            formState.isSuccess
+              ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50'
+              : 'bg-gradient-to-r from-red-50 to-rose-50 border border-red-200/50'
           }`}>
-            {formState.isSuccess ? (
-              <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-            ) : (
-              <XCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
-            )}
-            <p className={`text-sm ${
-              formState.isSuccess ? 'text-green-700' : 'text-red-700'
+            <div className={`p-2 rounded-lg ${formState.isSuccess ? 'bg-green-100/50' : 'bg-red-100/50'}`}>
+              {formState.isSuccess ? (
+                <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+              ) : (
+                <XCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+              )}
+            </div>
+            <p className={`text-sm leading-relaxed flex-1 ${
+              formState.isSuccess ? 'text-green-800' : 'text-red-800'
             }`}>
               {formState.message}
             </p>
