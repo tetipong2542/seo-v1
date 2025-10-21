@@ -89,3 +89,8 @@ html {
     @apply rounded-lg font-medium transition-all duration-200 active:scale-95;
   }
 }
+
+/* Navigation backdrop blur effect */
+.max-w-5xl.mx-auto.px-6 {
+  backdrop-filter: blur(5px);
+}
